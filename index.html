@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Android Emulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+        #noVNC_canvas { width: 100%; height: 100%; }
+        .header { position: absolute; top: 0; left: 0; width: 100%; color: #fff; text-align: center; background: rgba(0,0,0,0.5); z-index: 10; padding: 5px; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="header">🌐 Web Android Emulator (Play Store)</div>
+    <!-- noVNC 클라이언트 -->
+    <script src="https://cdn.jsdelivr.net/npm/novnc-core@1.4.0/dist/novnc.min.js"></script>
+    <script>
+        const rfb = new RFB(document.body, 'ws://' + window.location.hostname + ':6080');
+        rfb.viewOnly = false;
+        rfb.scaleViewport = true;
+        rfb.resizeSession = true;
+        rfb.addEventListener('connect', () => console.log('✅ VNC 연결 성공'));
+        rfb.addEventListener('disconnect', () => console.log('❌ VNC 연결 끊김'));
+    </script>
+</body>
+</html>
